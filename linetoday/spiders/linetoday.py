@@ -10,6 +10,10 @@ class LinetodaySpider(scrapy.Spider):
     start_urls = ['https://today.line.me/tw/v2/tab/domestic']
 
     def parse(self, response):
+        # item['url'] = response.css("a.articleCard articleCard--horizontal::attr(href)")[0].extract()
+        # item['title'] = response.css("a::attr(href)")[0].extract()
+        # item['source'] = response.css("a::attr(href)")[0].extract()
+        
         item = PostItem()
         soup = BeautifulSoup(response.text,'lxml')
         post_list = soup.find_all('a',class_='articleCard articleCard--horizontal')
