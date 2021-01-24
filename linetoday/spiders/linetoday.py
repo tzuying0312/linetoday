@@ -1,6 +1,7 @@
 
 from linetoday.items import PostItem
 from bs4 import BeautifulSoup
+from datetime import datetime
 import scrapy
 import time
 
@@ -11,9 +12,13 @@ class LinetodaySpider(scrapy.Spider):
 
     def parse(self, response):  
         item = PostItem()
-        for post in response.css('section > div > a'):
+        content = response.css('script:nth-child(2)::text')[0].extract()
+        publishTime_list = (content.replace('publishTimeUnix:','  ').split('  '))[-3:]
+        for i,post in enumerate(response.css('section > div > a')):
             item['title'] = (post.css('div.articleCard-content > span::text')[0].extract()).replace(' ','').replace('\n','')
             item['source'] = post.css('div.articleCard-content > div > span::text')[0].extract()
+            timestamp = publishTime_list[i].split('000,contentType')[0]
+            item['time'] = datetime.fromtimestamp(int(timestamp))
             item['url'] = post.css('a::attr(href)')[0].extract()
             yield item
 
