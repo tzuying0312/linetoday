@@ -55,6 +55,12 @@ ROBOTSTXT_OBEY = True
 #    'linetoday.middlewares.LinetodayDownloaderMiddleware': 543,
 #}
 
+DOWNLOADER_MIDDLEWARES = {
+   'linetoday.middlewares.RandomProxyMiddleware': 745,
+}
+
+PROXY_LIST_FILE = 'proxy.json'
+
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
