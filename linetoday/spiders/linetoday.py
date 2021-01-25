@@ -18,7 +18,10 @@ class LinetodaySpider(scrapy.Spider):
             item['title'] = (post.css('div.articleCard-content > span::text')[0].extract()).replace(' ','').replace('\n','')
             item['source'] = post.css('div.articleCard-content > div > span::text')[0].extract()
             timestamp = publishTime_list[i].split('000,contentType')[0]
-            item['time'] = datetime.fromtimestamp(int(timestamp))
+            try:
+                item['time'] = datetime.fromtimestamp(int(timestamp))
+            except:
+                item['time'] = ''
             item['url'] = post.css('a::attr(href)')[0].extract()
             yield item
 
