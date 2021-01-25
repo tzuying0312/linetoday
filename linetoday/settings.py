@@ -55,9 +55,9 @@ ROBOTSTXT_OBEY = True
 #    'linetoday.middlewares.LinetodayDownloaderMiddleware': 543,
 #}
 
-DOWNLOADER_MIDDLEWARES = {
-   'linetoday.middlewares.RandomProxyMiddleware': 745,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#    'linetoday.middlewares.RandomProxyMiddleware': 745,
+# }
 
 PROXY_LIST_FILE = 'proxy.json'
 
